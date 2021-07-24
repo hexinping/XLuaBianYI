@@ -1,7 +1,7 @@
-if [ -z "$ANDROID_NDK" ]; then
-    export ANDROID_NDK=~/android-ndk-r10e
-fi
-
+# if [ -z "$ANDROID_NDK" ]; then
+#     export ANDROID_NDK=~/android-ndk-r10e
+# fi
+export ANDROID_NDK=/Users/hexinping/Downloads/android-ndk-r10e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SRCDIR=$DIR/luajit-2.1.0b3
 # ANDROID_NDK=~/android-ndk-r10e
@@ -47,5 +47,7 @@ cd "$DIR"
 cmake --build build_lj_x86 --config Release
 mkdir -p plugin_luajit/Plugins/Android/libs/x86/
 cp build_lj_x86/libxlua.so plugin_luajit/Plugins/Android/libs/x86/libxlua.so
+
+
 
 
