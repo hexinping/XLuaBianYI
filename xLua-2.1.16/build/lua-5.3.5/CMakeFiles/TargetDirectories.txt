@@ -1,3 +1,0 @@
-F:/ChromDown/xLua-2.1.16/build/lua-5.3.5/CMakeFiles/xlua.dir
-F:/ChromDown/xLua-2.1.16/build/lua-5.3.5/CMakeFiles/ALL_BUILD.dir
-F:/ChromDown/xLua-2.1.16/build/lua-5.3.5/CMakeFiles/ZERO_CHECK.dir

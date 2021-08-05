@@ -52,6 +52,9 @@ LUAMOD_API int (luaopen_package) (lua_State *L);
 LUALIB_API void (luaL_openlibs) (lua_State *L);
 
 
+#define LUA_MYLIBNAME	"mylib"
+LUAMOD_API int (luaopen_mylib)(lua_State* L);
+
 
 #if !defined(lua_assert)
 #define lua_assert(x)	((void)0)
