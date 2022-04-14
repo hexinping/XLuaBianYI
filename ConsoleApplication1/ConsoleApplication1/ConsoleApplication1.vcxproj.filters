@@ -121,4 +121,78 @@
       <Filter>源文件\Lua</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\lapi.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lauxlib.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lcode.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lctype.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ldebug.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ldo.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lfunc.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lgc.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\llimits.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lmem.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lobject.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lopcodes.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lparser.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lstate.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lstring.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ltable.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ltm.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\luaconf.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lualib.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lundump.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lvm.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lzio.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lua.h">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lua.hpp">
+      <Filter>源文件\Lua</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

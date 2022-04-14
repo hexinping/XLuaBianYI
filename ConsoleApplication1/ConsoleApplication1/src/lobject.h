@@ -44,9 +44,10 @@
 */
 
 /* Variant tags for functions */
-#define LUA_TLCL	(LUA_TFUNCTION | (0 << 4))  /* Lua closure */
-#define LUA_TLCF	(LUA_TFUNCTION | (1 << 4))  /* light C function */
-#define LUA_TCCL	(LUA_TFUNCTION | (2 << 4))  /* C closure */
+#define LUA_TLCL	(LUA_TFUNCTION | (0 << 4))  /* Lua closure  Lua方法 */
+#define LUA_TLCF	(LUA_TFUNCTION | (1 << 4))  /* light C function C语言函数 */
+#define LUA_TCCL	(LUA_TFUNCTION | (2 << 4))  /* C closure C语言闭包函数 */
+
 
 
 /* Variant tags for strings */
@@ -98,12 +99,12 @@ struct GCObject {
 ** Union of all Lua values
 */
 typedef union Value {
-  GCObject *gc;    /* collectable objects */
-  void *p;         /* light userdata */
-  int b;           /* booleans */
-  lua_CFunction f; /* light C functions */
-  lua_Integer i;   /* integer numbers */
-  lua_Number n;    /* float numbers */
+  GCObject *gc;    /* collectable objects */ //存放所有需要垃圾回收的类型的对象
+  void *p;         /* light userdata */ //存放轻量用户数据类型(lightuserdata)
+  int b;           /* booleans */ 
+  lua_CFunction f; /* light C functions */ //存放一个方法
+  lua_Integer i;   /* integer numbers */ //存放int数字
+  lua_Number n;    /* float numbers */ //存放float数字
 } Value;
 
 
@@ -301,14 +302,14 @@ typedef TValue *StkId;  /* index to stack elements */
 ** (aligned according to 'UTString'; see next).
 */
 typedef struct TString {
-  CommonHeader;
-  lu_byte extra;  /* reserved words for short strings; "has hash" for longs */
-  lu_byte shrlen;  /* length for short strings */
-  unsigned int hash;
-  union {
-    size_t lnglen;  /* length for long strings */
-    struct TString *hnext;  /* linked list for hash table */
-  } u;
+	CommonHeader;
+	lu_byte extra;  /* reserved words for short strings; "has hash" for longs */
+	lu_byte shrlen;  /* 短字符串长度 length for short strings */
+	unsigned int hash; //字符串table 索引值
+	union {
+		size_t lnglen;  /* length for long strings 长字符串存储形式*/
+		struct TString* hnext;  /* 链表形式存储下一个TSring，短字符串用到 linked list for hash table */
+	} u;
 } TString;
 
 
@@ -488,22 +489,36 @@ typedef union TKey {
 	  (void)L; checkliveness(L,io_); }
 
 
+/**
+ * 节点格式 k=>v
+ * 节点结构：a = {x=12,mutou=99,[3]="hello"}
+ */
 typedef struct Node {
-  TValue i_val;
-  TKey i_key;
+	TValue i_val;
+	TKey i_key; //解决hash冲突，通过TKey结构体中的next链表指针实现 /* 链表 管理Hash Node，用于处理hash 冲突 for chaining (offset for next node) */
 } Node;
 
 
+/**
+ * Table数据结构，分两种存储类型：数组节点和hash节点
+ * 数组节点：sizearray为数字长度，一般存储key值在长度范围内的结果集
+ * hash节点：k=>v结构，能够存储各类复杂对象结构
+ *
+ * LUA语言用法：
+ * 数组节点：fruits = {"banana","orange","apple"}
+ * hash节点：a = {x=12,mutou=99,[3]="hello"}
+ * table中带table结构：local a = {{x = 1,y=2},{x = 3,y = 10}}
+ */
 typedef struct Table {
-  CommonHeader;
-  lu_byte flags;  /* 1<<p means tagmethod(p) is not present */
-  lu_byte lsizenode;  /* log2 of size of 'node' array */
-  unsigned int sizearray;  /* size of 'array' array */
-  TValue *array;  /* array part */
-  Node *node;
-  Node *lastfree;  /* any free position is before this position */
-  struct Table *metatable;
-  GCObject *gclist;
+	CommonHeader;
+	lu_byte flags;  /* 1<<p means tagmethod(p) is not present */
+	lu_byte lsizenode;  /* log2 of size of 'node' array */
+	unsigned int sizearray;  /* size of 'array' array */
+	TValue* array;  /* array part  通过数组方式，实现值的存储*/
+	Node* node; //通过Hash表的方式来存储Node节点, Node *node 为Hash节点的头部
+	Node* lastfree;  /* any free position is before this position  ==> Node *lastfree为 hash节点，最后一个空闲节点*/
+	struct Table* metatable; //元表，重载操作需要用
+	GCObject* gclist;
 } Table;
 
 
